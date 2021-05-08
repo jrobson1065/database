@@ -54,4 +54,14 @@ const dbManager = (tier) => {
       features: all,
     },
   };
+
+  const get = () => {
+    if (tier === "bronze") return "bronze";
+    if (tier === "silver") return "silver";
+    if (tier === "gold") return "gold";
+  };
+
+  const membership = access[get()];
+
+  return membership.features;
 };
