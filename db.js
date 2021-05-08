@@ -1,4 +1,4 @@
-const coccoData = (() => {
+export const coccoData = (() => {
   const dbSystem = (() => {
     const dbManager = (tier) => {
       const dataBase = {};
@@ -31,7 +31,7 @@ const coccoData = (() => {
           .map((id) => ({
             id,
             entry: dataBase[id],
-            addField: editEntry(id).addField,
+            addField: edit(id).field,
             remove: remove.bind(null, id),
           }));
 
@@ -91,4 +91,3 @@ const coccoData = (() => {
   };
 })();
 
-coccoData.bronze.create()
