@@ -1,4 +1,4 @@
-const dbManager = (() => {
+const dbManager = (tier) => {
   const dataBase = {};
   let id = 0;
 
@@ -25,7 +25,7 @@ const dbManager = (() => {
         id,
         entry: dataBase[id],
         addField: editEntry(id).addField,
-        remove: remove.bind(null, id)
+        remove: remove.bind(null, id),
       }));
 
     let i = 0;
@@ -39,12 +39,19 @@ const dbManager = (() => {
     return { current: results[i] };
   };
 
-  const obj = {
-    newEntry,
-    getAll,
-    edit,
-    getById,
-    getByField,
-    remove,
+  const basic = { newEntry, getAll, remove };
+  const some = { ...basic, edit, getById };
+  const all = { ...some, getByField };
+
+  const access = {
+    bronze: {
+      features: basic,
+    },
+    silver: {
+      features: some,
+    },
+    gold: {
+      features: all,
+    },
   };
-})();
+};
