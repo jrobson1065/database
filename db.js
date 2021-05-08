@@ -9,6 +9,11 @@ const dbSystem = (() => {
     };
 
     const newEntry = () => {
+      if (id === membership.limit) {
+        console.error("Membership limit reached.");
+        return;
+      }
+
       const newId = createEntry();
       return { addField: edit(newId).field };
     };
@@ -48,12 +53,15 @@ const dbSystem = (() => {
     const access = {
       bronze: {
         features: basic,
+        limit: 2,
       },
       silver: {
         features: some,
+        limit: 3,
       },
       gold: {
         features: all,
+        limit: 4,
       },
     };
 
